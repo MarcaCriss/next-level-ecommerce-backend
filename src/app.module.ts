@@ -10,6 +10,8 @@ import {
   DATABASE_PASSWORD,
   DATABASE_NAME,
 } from './config/constants';
+import { ProductsModule } from './products/products.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import {
       isGlobal: true,
       envFilePath: '.env',
     }),
+    ProductsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
