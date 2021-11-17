@@ -1,10 +1,12 @@
 import { Category } from '../../categories/entities/category.entity';
+import { Photo } from '../../photo/entities/photo.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -38,4 +40,7 @@ export class Product {
   @ManyToMany(() => Category, (categories) => categories.products)
   @JoinTable()
   categories: Category[];
+
+  @OneToMany(() => Photo, (photo) => photo.product)
+  photos: Photo[];
 }

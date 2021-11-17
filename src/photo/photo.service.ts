@@ -4,20 +4,28 @@ import { Repository } from 'typeorm';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { UpdatePhotoDto } from './dto/update-photo.dto';
 import { Photo } from './entities/photo.entity';
+import { ProductsService } from '../products/products.service';
 
 @Injectable()
 export class PhotoService {
   constructor(
     @InjectRepository(Photo)
     private readonly photoRepository: Repository<Photo>,
+    private readonly productsService: ProductsService,
   ) {}
 
   async findAll() {
-    return await this.photoRepository.find();
+    return await this.photoRepository.find({ relations: ['product'] });
   }
 
   async create(createPhotoDto: CreatePhotoDto) {
     const photo = this.photoRepository.create(createPhotoDto);
+    if (createPhotoDto.productId) {
+      const product = await this.productsService.findOne(
+        createPhotoDto.productId,
+      );
+      photo.product = product;
+    }
     return await this.photoRepository.save(photo);
   }
 
