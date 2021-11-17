@@ -12,6 +12,7 @@ import {
 } from './config/constants';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
+import { PhotoModule } from './photo/photo.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CategoriesModule } from './categories/categories.module';
     }),
     ProductsModule,
     CategoriesModule,
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
