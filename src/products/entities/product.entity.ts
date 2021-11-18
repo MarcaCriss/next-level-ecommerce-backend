@@ -6,6 +6,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -28,18 +29,14 @@ export class Product {
   @Column({ type: 'int' })
   stock: number;
 
-  @Column({ type: 'varchar' })
-  image: string;
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToMany(() => Category, (categories) => categories.products)
-  @JoinTable()
-  categories: Category[];
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 
   @OneToMany(() => Photo, (photo) => photo.product)
   photos: Photo[];
