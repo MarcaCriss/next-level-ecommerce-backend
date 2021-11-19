@@ -40,6 +40,7 @@ export class CategoriesService {
   }
 
   async remove(id: number) {
+    await this.findOne(id);
     return await this.categoryRepository.delete(id);
   }
 }

@@ -10,11 +10,18 @@ import {
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Auth } from '../common/decorators/auth.decorator';
+import { AppResource } from '../app.roles';
 
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
+  @Auth({
+    action: 'create',
+    possession: 'any',
+    resource: AppResource.CATEGORY,
+  })
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoriesService.create(createCategoryDto);
@@ -30,6 +37,11 @@ export class CategoriesController {
     return this.categoriesService.findOne(+id);
   }
 
+  @Auth({
+    action: 'update',
+    possession: 'any',
+    resource: AppResource.CATEGORY,
+  })
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -38,6 +50,11 @@ export class CategoriesController {
     return this.categoriesService.update(+id, updateCategoryDto);
   }
 
+  @Auth({
+    action: 'delete',
+    possession: 'any',
+    resource: AppResource.CATEGORY,
+  })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(+id);

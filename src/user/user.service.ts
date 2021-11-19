@@ -24,9 +24,16 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async getUser(id: number) {
-    const user = await this.userRepository.findOne(id);
-    if (!user) throw new NotFoundException('No existe el usuario');
+  async getUser(id: number, userEntity?: User) {
+    const user = await this.userRepository
+      .findOne(id)
+      .then((u) =>
+        !userEntity ? u : !!u && userEntity.id === u.id ? u : null,
+      );
+
+    if (!user)
+      throw new NotFoundException('User does not exists or unauthorized');
+
     return user;
   }
 
@@ -43,16 +50,16 @@ export class UserService {
     return user;
   }
 
-  async updateUser(id: number, dto: EditUserDto) {
-    const user = await this.getUser(id);
+  async updateUser(id: number, dto: EditUserDto, userEntity?: User) {
+    const user = await this.getUser(id, userEntity);
     const updatedUser = Object.assign(user, dto);
     const userUpdated = await this.userRepository.save(updatedUser);
     delete userUpdated.password;
     return userUpdated;
   }
 
-  async deleteUser(id: number) {
-    const user = await this.getUser(id);
+  async deleteUser(id: number, userEntity?: User) {
+    const user = await this.getUser(id, userEntity);
     return await this.userRepository.remove(user);
   }
 
