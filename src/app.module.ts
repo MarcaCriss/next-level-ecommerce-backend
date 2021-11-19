@@ -13,6 +13,10 @@ import {
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { PhotoModule } from './photo/photo.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
 
 @Module({
   imports: [
@@ -36,9 +40,12 @@ import { PhotoModule } from './photo/photo.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    AccessControlModule.forRoles(roles),
     ProductsModule,
     CategoriesModule,
     PhotoModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
