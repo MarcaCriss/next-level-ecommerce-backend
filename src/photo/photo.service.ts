@@ -44,4 +44,11 @@ export class PhotoService {
   async remove(id: number) {
     return await this.photoRepository.delete(id);
   }
+
+  async getPhotoByProduct(productId: number) {
+    const products = await this.photoRepository.find({
+      where: { product: productId },
+    });
+    return products;
+  }
 }

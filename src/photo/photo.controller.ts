@@ -9,6 +9,7 @@ import {
   UploadedFile,
   UploadedFiles,
   Body,
+  Delete,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
@@ -49,6 +50,11 @@ export class PhotoController {
     return this.photoService.create(createPhotoDto);
   }
 
+  @Get(':productId/products')
+  getPhotoByProduct(@Param('productId') productId: number) {
+    return this.photoService.getPhotoByProduct(productId);
+  }
+
   @Get(':imgpath')
   getImage(@Param('imgpath') image: string, @Res() res: any) {
     return res.sendFile(image, { root: './uploads' });
@@ -57,5 +63,10 @@ export class PhotoController {
   @Get('')
   getAllPhotos() {
     return this.photoService.findAll();
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.photoService.remove(+id);
   }
 }
