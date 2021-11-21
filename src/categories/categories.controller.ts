@@ -17,16 +17,6 @@ import { AppResource } from '../app.roles';
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @Auth({
-    action: 'create',
-    possession: 'any',
-    resource: AppResource.CATEGORY,
-  })
-  @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoriesService.create(createCategoryDto);
-  }
-
   @Get()
   findAll() {
     return this.categoriesService.findAll();
@@ -35,6 +25,16 @@ export class CategoriesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);
+  }
+
+  @Auth({
+    action: 'create',
+    possession: 'own',
+    resource: AppResource.CATEGORY,
+  })
+  @Post()
+  create(@Body() createCategoryDto: CreateCategoryDto) {
+    return this.categoriesService.create(createCategoryDto);
   }
 
   @Auth({

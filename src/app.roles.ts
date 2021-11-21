@@ -18,11 +18,6 @@ roles
   .grant(AppRoles.USUARIO)
   .updateOwn(AppResource.USER)
   .deleteOwn(AppResource.USER)
-  /*
-  .createOwn([AppResource.PRODUCT])
-  .updateOwn([AppResource.PRODUCT])
-  .deleteOwn([AppResource.PRODUCT])
-  */
   // ADMIN ROLES
   .grant(AppRoles.ADMIN)
   .extend(AppRoles.USUARIO)

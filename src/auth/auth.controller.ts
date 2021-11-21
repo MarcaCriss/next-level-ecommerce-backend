@@ -15,20 +15,19 @@ export class AuthController {
   @Post('login')
   login(@Body() loginDto: LoginDto, @User() user: UserEntity) {
     const data = this.authService.login(user);
-    return {
-      message: 'Login exitoso',
-      data,
-    };
+    return data;
   }
 
   @Auth()
   @Get('refresh')
   refreshToken(@User() user: UserEntity) {
     const data = this.authService.login(user);
+    return data;
     const { password, ...rest } = data.user;
     return {
       message: 'Refresh exitoso',
       user: { ...rest },
+      access_token: data.access_token,
     };
   }
 }
