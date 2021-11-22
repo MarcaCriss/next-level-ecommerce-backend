@@ -16,7 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { PhotoService } from './photo.service';
 
-@ApiTags('Photos')
+@ApiTags('Fotos')
 @Controller('photo')
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}

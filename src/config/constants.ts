@@ -8,3 +8,5 @@ export const JWT_SECRET = 'JWT_SECRET';
 
 export const DEFAULT_USER_EMAIL = 'DEFAULT_USER_EMAIL';
 export const DEFAULT_USER_PASSWORD = 'DEFAULT_USER_PASSWORD';
+
+export const TYPEORM_CONFIG = 'database.config';

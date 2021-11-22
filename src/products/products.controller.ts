@@ -15,7 +15,7 @@ import { Auth } from '../common/decorators/auth.decorator';
 import { AppResource } from '../app.roles';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 
-@ApiTags('products')
+@ApiTags('Productos')
 @Controller('products')
 export class ProductsController {
   constructor(
