@@ -4,9 +4,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { Pedido } from '../../pedidos/entities/pedido.entity';
 
 @Entity('users')
 export class User {
@@ -34,11 +37,20 @@ export class User {
   @Column({ type: 'simple-array' })
   roles: string[];
 
+  @Column({ type: 'int', nullable: true })
+  numero: number;
+
   @Column({ type: 'bool', default: true })
   status: boolean;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @OneToMany(() => Pedido, (pedido) => pedido.user)
+  pedidos: Pedido[];
+
+  @CreateDateColumn({ name: 'created_at' })
   createAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updateAt: Date;
 
   @BeforeInsert()
   @BeforeUpdate()

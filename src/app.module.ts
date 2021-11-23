@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { roles } from './app.roles';
 import { TYPEORM_CONFIG } from './config/constants';
+import { PedidosModule } from './pedidos/pedidos.module';
 import databaseConfig from './config/database.config';
 
 @Module({
@@ -39,6 +40,7 @@ import databaseConfig from './config/database.config';
     PhotoModule,
     UserModule,
     AuthModule,
+    PedidosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

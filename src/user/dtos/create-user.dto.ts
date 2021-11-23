@@ -25,6 +25,11 @@ export class CreateUserDto {
   lastName: string;
 
   @ApiProperty()
+  @IsOptional()
+  @IsString({ message: 'El numero debe ser un entero' })
+  numero: number;
+
+  @ApiProperty()
   @IsEmail()
   email: string;
 
