@@ -11,7 +11,7 @@ import {
 import { hash } from 'bcryptjs';
 import { Pedido } from '../../pedidos/entities/pedido.entity';
 
-@Entity('users')
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
