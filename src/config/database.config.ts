@@ -14,12 +14,12 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
     autoLoadEntities: true,
     // migrations
-    // migrationsRun: true,
-    // migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
-    // migrationsTableName: 'migrations_typeorm',
-    // cli: {
-    //   migrationsDir: 'src/migration',
-    // },
+    migrationsRun: true,
+    migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
+    migrationsTableName: 'migrations_typeorm',
+    cli: {
+      migrationsDir: 'src/migration',
+    },
     ssl: {
       rejectUnauthorized: false,
     },
