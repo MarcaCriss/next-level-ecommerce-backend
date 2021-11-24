@@ -4,7 +4,7 @@ import { join } from 'path';
 
 function typeormModuleOptions(): TypeOrmModuleOptions {
   return {
-    type: 'mysql',
+    type: 'postgres',
     host: process.env.DATABASE_HOST,
     port: parseInt(process.env.DATABASE_PORT, 10),
     username: process.env.DATABASE_USERNAME,
@@ -13,17 +13,17 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
     autoLoadEntities: true,
     // migrations
-    migrationsRun: true,
-    migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
-    migrationsTableName: 'migrations_typeorm',
-    cli: {
-      migrationsDir: 'src/migration',
-    },
+    // migrationsRun: true,
+    // migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
+    // migrationsTableName: 'migrations_typeorm',
+    // cli: {
+    //   migrationsDir: 'src/migration',
+    // },
 
     // Activar SOLO MANUALMENTE en DESARROLLO SI ES NECESARIO (DESACTIVAR EN PRODUCCION).
-    // synchronize: true,
-    // logging: true,
-    // logger: 'file',
+    synchronize: true,
+    logging: true,
+    logger: 'file',
   };
 }
 

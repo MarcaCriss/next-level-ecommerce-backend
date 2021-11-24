@@ -6,7 +6,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import { hash } from 'bcryptjs';
 import { Pedido } from '../../pedidos/entities/pedido.entity';

@@ -15,6 +15,7 @@ import { CreateUserDto, EditUserDto } from './dtos';
 import { UserService } from './user.service';
 import { User as UserEntity } from './entities/user.entity';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
+import { UpdateNumeroDto } from './dtos/create-user.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -63,6 +64,14 @@ export class UserController {
       data = await this.userService.updateUser(id, rest, user);
     }
     return { message: 'User edited', data };
+  }
+
+  @Put(':id/numero')
+  async updateUserNumber(
+    @Param('id') id: number,
+    @Body() data: UpdateNumeroDto,
+  ) {
+    return await this.userService.updateUserNumber(id, data);
   }
 
   @Auth({

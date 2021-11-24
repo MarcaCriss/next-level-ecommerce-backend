@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto, EditUserDto } from './dtos';
 import { User } from './entities';
+import { UpdateNumeroDto } from './dtos/create-user.dto';
 
 export interface UserFindOne {
   id?: number;
@@ -56,6 +57,12 @@ export class UserService {
     const userUpdated = await this.userRepository.save(updatedUser);
     delete userUpdated.password;
     return userUpdated;
+  }
+
+  async updateUserNumber(id: number, data: UpdateNumeroDto) {
+    const user = await this.getUser(id);
+    user.numero = data.numero;
+    return await this.userRepository.save(user);
   }
 
   async deleteUser(id: number, userEntity?: User) {

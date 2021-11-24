@@ -7,9 +7,12 @@ import {
   IsOptional,
   IsArray,
   IsEnum,
+  IsNotEmpty,
+  IsNumber,
 } from 'class-validator';
 import { AppRoles } from './../../app.roles';
 import { EnumToString } from 'src/common/helpers/enumToString';
+import { Type } from 'class-transformer';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -26,7 +29,8 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsString({ message: 'El numero debe ser un entero' })
+  @Type(() => Number)
+  @IsNumber()
   numero: number;
 
   @ApiProperty()
@@ -45,4 +49,12 @@ export class CreateUserDto {
     message: `Debe ser un rol valido, ${EnumToString(AppRoles)}`,
   })
   roles: string[];
+}
+
+export class UpdateNumeroDto {
+  @ApiProperty()
+  @IsNumber()
+  @Type(() => Number)
+  @IsNotEmpty({ message: 'El numero es necesario' })
+  numero: number;
 }
