@@ -5,11 +5,12 @@ import { join } from 'path';
 function typeormModuleOptions(): TypeOrmModuleOptions {
   return {
     type: 'postgres',
-    host: process.env.DATABASE_HOST,
-    port: parseInt(process.env.DATABASE_PORT, 10),
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    url: process.env.DATABASE_URL,
+    //host: process.env.DATABASE_HOST,
+    // port: parseInt(process.env.DATABASE_PORT, 10),
+    // username: process.env.DATABASE_USERNAME,
+    // password: process.env.DATABASE_PASSWORD,
+    // database: process.env.DATABASE_NAME,
     entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
     autoLoadEntities: true,
     // migrations
@@ -19,11 +20,14 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     // cli: {
     //   migrationsDir: 'src/migration',
     // },
+    ssl: {
+      rejectUnauthorized: false,
+    },
 
     // Activar SOLO MANUALMENTE en DESARROLLO SI ES NECESARIO (DESACTIVAR EN PRODUCCION).
-    synchronize: true,
-    logging: true,
-    logger: 'file',
+    //synchronize: true,
+    //logging: true,
+    //logger: 'file',
   };
 }
 

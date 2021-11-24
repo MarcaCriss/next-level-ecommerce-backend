@@ -15,7 +15,7 @@ async function bootstrap() {
   setUserDefault(configService);
   generateTypeormConfigFile(configService);
 
-  app.enableCors({ origin: 'http://localhost:4200' });
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
